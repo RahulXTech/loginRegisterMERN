@@ -1,0 +1,69 @@
+# Dependencies
+
+node_modules/
+
+# Logs
+
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment variables
+
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Build folders
+
+dist/
+build/
+
+# OS files
+
+.DS_Store
+Thumbs.db
+
+# IDE / Editor files
+
+.vscode/
+.idea/
+
+# Cache
+
+.cache/
+.parcel-cache/
+
+# Coverage
+
+coverage/
+
+# Temporary files
+
+*.tmp
+*.temp
+
+# MongoDB
+
+*.mongodb
+
+# Next.js
+
+.next/
+
+# Vite
+
+.vite/
+
+# Optional npm cache
+
+.npm
+
+# Mac system files
+
+.AppleDouble
+.LSOverride

@@ -14,7 +14,7 @@ function UploadPhoto() {
     axios.post("http://localhost:3000/create-post", formData)
       .then((res)=>{
         console.log(res)
-        navigate("http://localhost:5174/")
+        navigate("/")
       })
       .catch((err)=>{
         console.log("Post error message :", err)

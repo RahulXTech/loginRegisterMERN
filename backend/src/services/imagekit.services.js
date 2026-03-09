@@ -1,16 +1,22 @@
-// import ImageKit from '@imagekit/nodejs';
-const ImageKit = require("@imagekit/nodejs")
+const ImageKit = require("imagekit");
+
 const client = new ImageKit({
-  privateKey: process.env.PRIVATE_KEY, // This is the default and can be omitted
-  publicKey: process.env.PUBLIC_KEY, // This is the default and can be omitted
-  urlEndpoint: process.env.URL_END_POINT, // This is the default and can be omitted
+  privateKey: process.env.PRIVATE_KEY,
+  publicKey: process.env.PUBLIC_KEY,
+  urlEndpoint: process.env.URL_END_POINT,
 });
 
-async function uploadFile(buffer){
-    const result = await client.files.upload({
-        file: buffer.toString("base64"),
-        fileName : Date.now() + ".jpg"
-    })
-    return result;
+async function uploadFile(buffer) {
+    try {
+        const result = await client.upload({
+            file: buffer.toString("base64"),
+            fileName: Date.now() + ".jpg"
+        });
+
+        return result;
+    } catch (error) {
+        console.log("Image upload error:", error);
+    }
 }
+
 module.exports = uploadFile;

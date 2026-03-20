@@ -6,10 +6,10 @@ connectDB()
 const authRouter = require("../src/routes/auth.routes")
 const cookiesParser = require("cookie-parser")
 
-app.use(express.json());
-app.use("/api/auth",authRouter);
+app.use(express.json())
+app.use("/api/auth",authRouter)
 app.use(cookiesParser())
-
+ 
 
 
 module.exports = app;

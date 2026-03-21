@@ -1,26 +1,26 @@
 import React from "react";
 import { useNavigate } from 'react-router-dom';
-import axios from "axios"
+import axios from "axios";
 
 function UploadPhoto() {
 
-  const navigate = useNavigate();   // ✅ correct place
+  const navigate = useNavigate();
 
-  const handleSubmit = async (e)=>{
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const formData = new FormData(e.target);
 
-    axios.post("http://localhost:3000/create-post", formData)
-      .then((res)=>{
-        console.log(res)
-        navigate("/")
+    axios.post(`${import.meta.env.VITE_API_URL}/create-post`, formData)
+      .then((res) => {
+        console.log(res);
+        navigate("/");
       })
-      .catch((err)=>{
-        console.log("Post error message :", err)
-        alert("Error creating post")
-      })
-  }
+      .catch((err) => {
+        console.log("Post error message :", err);
+        alert("Error creating post");
+      });
+  };
 
   return (
     <div className="max-w-4xl mx-auto mt-10 bg-gray-800 p-8 rounded-xl">
@@ -44,16 +44,14 @@ function UploadPhoto() {
           className="bg-gray-900 p-3 rounded-lg outline-none"
         />
 
-        <button
-          className="bg-purple-600 py-3 rounded-lg hover:bg-purple-700"
-        >
+        <button className="bg-purple-600 py-3 rounded-lg hover:bg-purple-700">
           Upload Photo
         </button>
 
       </form>
 
     </div>
-  )
+  );
 }
 
 export default UploadPhoto;

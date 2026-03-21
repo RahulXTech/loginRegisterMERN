@@ -45,34 +45,34 @@ const token = jwt.sign({
  */
 async function userLoginController(req, res){
     const {email, password} = req.body;
+    
+    if(!email || !password) return res.status(400).json({message : "All field are required."});
 
     const user = await userModel.findOne({email}).select("+password")
     if(!user) return res.status(401).json({message : "Email or password is INVALID1"});
 
-
     const isValidPassword = await user.comparePassword(password);
-    console.log("Entered password:", password);
-console.log("Stored hash:", user.password);
-
+    
+    console.log("Password match: ", isValidPassword)
     if (!isValidPassword) {
     return res.status(401).json({
         message: "Email or password is INVALID"
-    });
+        });
     }
-    
+
     const token = jwt.sign({
-        userID : user._id
-    }, process.env.JWT_SECRET, {expiresIn : '24h'})
+        userId: user._id   
+        }, process.env.JWT_SECRET, { expiresIn: '24h' });
 
     res.cookie("token", token);
-    
-    res.status(200).json({
-        message : "Login successfully.",
-        user: {
-            _id : user._id,
-            name : user.name,
-            email : user.email
-        }
-    })    
+
+res.status(200).json({
+    message : "Login successfully.",
+    user: {
+        _id : user._id,
+        name : user.name,
+        email : user.email
+    }
+})
 }  
 module.exports = {userRegisterContoller, userLoginController}

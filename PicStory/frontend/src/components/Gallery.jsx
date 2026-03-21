@@ -9,7 +9,8 @@ function Gallery() {
 
   // fetch posts
   useEffect(() => {
-    axios.get("http://localhost:3000/show-post")
+    axios.get(`${import.meta.env.VITE_API_URL}/show-post`)
+    // axios.get("http://localhost:3000/show-post")
       .then((res) => {
         setPost(res.data);
         setLoading(false);
@@ -32,8 +33,8 @@ function Gallery() {
   // delete post
   const deletePost = async (id) => {
     try {
-
-      await axios.delete(`http://localhost:3000/delete-post/${id}`);
+      await axios.delete(`${import.meta.env.VITE_API_URL}/delete-post/${id}`);
+      // await axios.delete(`http://localhost:3000/delete-post/${id}`);
 
       alert("Post deleted successfully");
 

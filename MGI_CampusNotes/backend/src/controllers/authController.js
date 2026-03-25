@@ -20,7 +20,6 @@ try{
     })
     }
 }
-
 async function loginUserController(req, res) {
 try{
     const {email, password} = req.body;
@@ -47,14 +46,10 @@ try{
                 role : isUserExist.role
             }
         });
-    }
-
-   
+    }  
 }catch(error){
     res.status(500).json({message : "Server error", error : error.message})
 }
 
 }
-
-
 module.exports = {registerUserController, loginUserController}

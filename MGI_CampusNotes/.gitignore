@@ -1,0 +1,84 @@
+# =========================
+
+# ROOT LEVEL
+
+# =========================
+
+node_modules/
+.env
+.env.*
+!.env.example
+
+# =========================
+
+# BACKEND (Node / Express)
+
+# =========================
+
+backend/node_modules/
+backend/.env
+backend/logs/
+backend/uploads/
+backend/tmp/
+backend/*.log
+
+# =========================
+
+# FRONTEND (React / Vite)
+
+# =========================
+
+client/node_modules/
+client/build/
+client/dist/
+client/.env
+client/.env.*
+client/.cache/
+client/.parcel-cache/
+
+# =========================
+
+# LOG FILES
+
+# =========================
+
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# =========================
+
+# OS FILES
+
+# =========================
+
+.DS_Store
+Thumbs.db
+
+# =========================
+
+# IDE / EDITOR
+
+# =========================
+
+.vscode/
+.idea/
+*.swp
+
+# =========================
+
+# TEST / COVERAGE
+
+# =========================
+
+coverage/
+
+# =========================
+
+# TEMP FILES
+
+# =========================
+
+tmp/
+temp/

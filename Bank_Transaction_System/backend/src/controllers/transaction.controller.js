@@ -83,7 +83,5 @@ async function createTransaction(req, res) {
     /**
      * 4. Driver sender balance from ledger.
      */
-
     
-
 }

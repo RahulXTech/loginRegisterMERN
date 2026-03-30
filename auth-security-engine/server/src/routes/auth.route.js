@@ -1,14 +1,21 @@
 import express from "express";
-import {registerUserController, loginUserController} from "../controllers/auth.controller.js";
+import {registerUserController, loginUserController, getInfo} from "../controllers/auth.controller.js";
 
-const router = express.Router();
-
- 
+const authRouter = express.Router(); 
 /**
  * POST - /api/auth/register
  */
-router.post("/register", registerUserController);
-router.post("/login", loginUserController);
+authRouter.post("/register", registerUserController);
 
-export default router;
+/**
+ * GET - /api/auth/get-me
+*/
+authRouter.get("/get-me", getInfo);
 
+/**
+ * POST - /api/auth/login
+ */
+authRouter.post("/login", loginUserController);
+
+
+export default authRouter;

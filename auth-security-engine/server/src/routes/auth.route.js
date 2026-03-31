@@ -1,5 +1,5 @@
 import express from "express";
-import {registerUserController, loginUserController, getInfo} from "../controllers/auth.controller.js";
+import {registerUserController, getInfo, refreshToken} from "../controllers/auth.controller.js";
 
 const authRouter = express.Router(); 
 /**
@@ -13,9 +13,9 @@ authRouter.post("/register", registerUserController);
 authRouter.get("/get-me", getInfo);
 
 /**
- * POST - /api/auth/login
+ * GET - /api/auth/refresh-token
  */
-authRouter.post("/login", loginUserController);
+authRouter.get("/refresh-token", refreshToken);
 
 
 export default authRouter;

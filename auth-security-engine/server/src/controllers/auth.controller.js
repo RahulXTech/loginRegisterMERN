@@ -2,7 +2,7 @@ import userSchema from "../models/auth.model.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken"
 import config from "../config/config.js";
-
+import sessionSchem from "../models/session.mode.js"
 // REGISTER
 export async function registerUserController(req, res) {
   const { user, email, password } = req.body;
@@ -55,32 +55,6 @@ export async function registerUserController(req, res) {
   });
 }
 
-// LOGIN 
-export async function loginUserController(req, res) {
-  const { email, password } = req.body;
-
-  const user = await userSchema.findOne({ email });
-  if (!user) {
-    return res.status(400).json({ message: "Invalid email or password please try again." });
-  }
-  const checkPass = bcrypt.compareSync(password, user.password)
-
-  if (!checkPass) {
-    return res.status(400).json({ message: "Invalid email or password please try again." });
-  }
-
-  const token = jwt.sign({
-    id : user._id
-  },config.JWT_SECRET ,{expiresIn : "1d"})
-  res.cookie("token", token);
-  return res.status(200).json({
-    message: "Login successful",
-    user: user,
-    email: email,
-    token
-  });
-}
-
 // Get-info from token.
 export async function getInfo(req, res){
   try{
@@ -115,3 +89,49 @@ export async function getInfo(req, res){
 }
 
 //Refresh token 
+export async function refreshToken(req, res) {
+  try {
+    const refreshToken = req.cookies.refreshToken;
+
+    if (!refreshToken) {
+      return res.status(401).json({
+        message: "Refresh token not found."
+      });
+    }
+
+    const decoded = jwt.verify(
+      refreshToken,
+      config.JWT_SECRET
+    );
+
+    const accessToken = jwt.sign(
+      { id: decoded.id },
+      config.JWT_SECRET,
+      { expiresIn: "15m" }
+    );
+
+    const newRefreshToken = jwt.sign(
+      { id: decoded.id },
+      config.JWT_SECRET,
+      { expiresIn: "7d" }
+    );
+
+    res.cookie("refreshToken", newRefreshToken, {
+      httpOnly: true,
+      secure: false,
+      sameSite: "lax",
+      maxAge: 7 * 24 * 60 * 60 * 1000
+    });
+
+    return res.status(200).json({
+      message: "Access token refreshed successfully",
+      accessToken
+    }); 
+
+  } catch (err) {
+    console.log(err); 
+    return res.status(403).json({
+      message: "Invalid or expired refresh token"
+    });
+  }
+}

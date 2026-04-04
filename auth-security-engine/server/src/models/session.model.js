@@ -1,10 +1,9 @@
 import mongoose from "mongoose";
-import { use } from "react";
 
 
 const sessionSchema = new mongoose.Schema({
     user : {
-        type : mongoose.Schema.type.ObjectId,
+      type : mongoose.Schema.Types.ObjectId,
         ref : "users",
         required : [true, "User is required"]
     },
@@ -16,6 +15,9 @@ const sessionSchema = new mongoose.Schema({
         type : String,
         required : [true, "user agent is required"]
     },
+    ip: {  
+        type: String
+    },
     revoked : {
         type : Boolean,
         default : false
@@ -24,5 +26,5 @@ const sessionSchema = new mongoose.Schema({
     timestamps : true
 })
 
-
-module.exports = mongoose.model("sessions", sessionSchema)
+const sessionModel = mongoose.model("sessions", sessionSchema);
+export default sessionModel;

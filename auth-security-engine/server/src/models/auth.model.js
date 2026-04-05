@@ -15,6 +15,10 @@ const registerSchema = new mongoose.Schema(
     password:  {
         type : String,
         required : [true, "User name is required"]
+    },
+    verified : {
+        type : Boolean,
+        default : false
     }
 },{ timestamps: true });
 

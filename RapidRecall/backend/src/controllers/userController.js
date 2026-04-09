@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import User from "../models/userModel";
 import validator from "validator"
 import jwt from "jsonwebtoken"
+import { use } from "react";
 //REGISTER
 export async function register(req, res){
     try{
@@ -52,4 +53,42 @@ export async function register(req, res){
             message : 'Server error'
         })
     }
+}
+
+export async function login(req, res) {
+  try{
+    const {email, password} = req.body;
+    if(!email || !password){
+        return res.status(400).json({
+            success : false,
+            message : "All fiels are require."
+        })
+    }
+    const user = await User.findOne({email})
+    if(!user) return res.status(401).json({
+        success : false,
+        message : "Invalid email or password"
+    })
+    const isMatch = await bcrypt.compare(password, user.password)
+    if(!isMatch) return res.status(401).json({
+        success : false,
+        message : "Invalid email or password."
+    })
+
+    const token = jwt.sign({
+        id : user._id.toString()
+    }, process.env.JWT_SECRET, {expiresIn : "7d"})
+
+    return res.status(201).json({
+        success : true,
+        message : "Login successfull",
+        token,
+    })
+  }catch(err){
+    console.error('Login error: ', err);
+    return res.status(500).json({
+        success : false,
+        message : "Server error"
+    })
+  }
 }

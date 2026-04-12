@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
-import User from "../models/userModel";
-import validator from "validator"
+import User from "../models/userModel.js";
+import validator from "validator";
 import jwt from "jsonwebtoken"
-import { use } from "react";
+import bcrypt from "bcrypt"
 //REGISTER
 export async function register(req, res){
     try{
@@ -56,7 +56,7 @@ export async function register(req, res){
 }
 
 export async function login(req, res) {
-  try{
+  try{ 
     const {email, password} = req.body;
     if(!email || !password){
         return res.status(400).json({

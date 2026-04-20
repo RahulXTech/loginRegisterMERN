@@ -1,12 +1,13 @@
 import React from 'react'
-
+import { Routes, Route, Router } from 'react-router-dom'
+import Home from './pages/Home'
+import Navbar from './components/Navbar'
 function App() {
   return (
-    <div>
-        <h1 class="text-2xl font-bold underline">
-    Hello world!
-  </h1>
-    </div>
+    <Routes>
+      <Route path='/' element={<Home/>} />
+      <Route path='/nav' element={<Navbar/>} />
+    </Routes>
   )
 }
 export default App

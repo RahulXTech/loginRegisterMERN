@@ -1,15 +1,10 @@
-import express from 'express'
-import authMiddleware from '../middleware/authMiddleware'
-import { createResult, listResults } from '../controllers/resultController'
-
-
+import express from 'express';
+import authMiddleware from '../middleware/authMiddleware.js';
+import { createResult, listResults } from '../controllers/resultController.js';
 
 const resultRouter = express.Router();
 
-
-resultRouter.post('/', authMiddleware, createResult)
-resultRouter.get('/', authMiddleware, listResults)
-
-
+resultRouter.post('/', authMiddleware, createResult);
+resultRouter.get('/', authMiddleware, listResults);
 
 export default resultRouter;

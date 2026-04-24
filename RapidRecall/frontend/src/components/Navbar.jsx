@@ -1,10 +1,10 @@
 import React from 'react'
 import {navbarStyles} from '../assets/dummyStyles'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
-import { Award, LogIn, Menu, User, X } from 'lucide-react';
+import { Award, LogIn, LogOut, Menu, User, X } from 'lucide-react';
 import { useState } from 'react';
 
-function Navbar({logoSrc}) {
+    function Navbar({logoSrc}) {
     const navigate = useNavigate();
     const [loggedIn, setLoggedIn] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
@@ -58,7 +58,7 @@ function Navbar({logoSrc}) {
             </div>
             <div className={navbarStyles.titleContainer}>
                 <div className={navbarStyles.titleBackground}>
-                    <h1 className={navbarStyles.titleText}>Hexagon Quiz Application</h1>
+                    <h1 className={navbarStyles.titleText}>RepidRecall Quiz Application</h1>
                 </div>
             </div>
             <div className={navbarStyles.desktopButtonsContainer}>
@@ -91,15 +91,41 @@ function Navbar({logoSrc}) {
                 {menuOpen && (
                     <div className={navbarStyles.mobileMenuPanel}>
                         <ul className={navbarStyles.mobileMenuList}>
-                             
+                             <li>
+                                <NavLink to='/result' className={navbarStyles.mobileMenuItem} onClick={()=>setMenuOpen(false)}>
+                                <Award className={navbarStyles.mobileMenuIcon}/>
+                                My result
+                                </NavLink>
+                             </li>
+                        {loggedIn ? (
+                            <li>
+                                <button type="button" onClick={handleLogout} className={navbarStyles.mobileMenuItem}>
+                                    <LogOut className={navbarStyles.mobileMenuIcon} />
+                                    Logout
+                                </button>
+                            </li>
+                        ) : (
+                            <li>
+                                <NavLink to='/login' className={navbarStyles.mobileMenuItem} onClick={()=> setMenuOpen(false)}>
+                                    <LogIn className={navbarStyles.mobileMenuIcon} />
+                                    Login
+                                </NavLink>
+                            </li>
+                        )}
                         </ul>
                     </div>
                 )}
-
             </div>
         </div>
+
+        <style>{navbarStyles.animations}</style>
+
     </nav>
   )
 }
-
 export default Navbar
+
+
+
+
+

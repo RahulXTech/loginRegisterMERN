@@ -26,3 +26,9 @@ dist-ssr
 node_modules/
 .env
 dist/
+
+node_modules
+.env
+desktop.ini
+dist
+build

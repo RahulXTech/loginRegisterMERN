@@ -15,7 +15,7 @@ import { useState } from 'react';
             localStorage.removeItem('authToken');
             localStorage.clear();
         }catch(err){
-            //ignore all the error
+            console.log(err)
         }
         window.dispatchEvent(
             new CustomEvent("authChanged", {detail : {User : null}})
@@ -117,7 +117,6 @@ import { useState } from 'react';
                 )}
             </div>
         </div>
-
         <style>{navbarStyles.animations}</style>
 
     </nav>

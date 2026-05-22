@@ -66,7 +66,6 @@ export const loginUser = async (req, res) => {
         message: "Invalid email or password",
       });
     }
-    localStorage.setItem("token", data.token);
   } catch (error) {
     res.status(500).json({
       message: error.message,

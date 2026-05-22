@@ -12,7 +12,7 @@ const Dashboard = () => {
         <div className="max-w-7xl mx-auto">
 
           <h1 className="text-4xl font-bold text-gray-800 mb-8">
-            Student Dashboard 📊
+            Student Dashboard 
           </h1>
 
           {/* Stats Cards */}
@@ -44,7 +44,7 @@ const Dashboard = () => {
 
             <div className="bg-white rounded-xl shadow-md p-6">
               <h2 className="text-xl font-bold mb-4">
-                Weekly Progress 🚀
+                Weekly Progress 
               </h2>
 
               <p className="text-gray-600 mb-3">

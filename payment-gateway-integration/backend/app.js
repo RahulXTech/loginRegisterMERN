@@ -1,14 +1,9 @@
 import express from 'express'
-import {processPayment} from './controller/productController.js';
+import productRoute from './routes/productRoutes.js';
 const app = express();
 
 app.use(express.json())
-app.use("/api/v1", processPayment)
-
-
+app.use(express.urlencoded({extended : true}))
+app.use("/api/v1", productRoute)
 
 export default app;
-
-
-
-
